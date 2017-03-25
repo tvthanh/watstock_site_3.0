@@ -1,0 +1,10 @@
+<ul class="stats-list-group news-list-group">
+   <li class="list-group-item" ng-repeat="item in news.list | limitTo:10">
+      <div>
+         <h3 class="title"><a ng-href="{{item.url}}" target="_blank">{{item.title}}</a>
+         </h3>
+         <p class="date"></p>
+         <p class="details">{{item.title}}</p>
+      </div>
+   </li>
+</ul>

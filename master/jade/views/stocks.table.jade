@@ -1,0 +1,60 @@
+.stocks-table.ml-xl.mr-xl.p-lg
+  p.text-center
+    button.btn.btn-tab.btn-main(ng-class="{'btn-active': stocks.forecastDay === 0}" ng-click='stocks.showTable(0)')
+      span.ml-lg.mr-lg Today's Price
+    button.btn.btn-tab.btn-orange.ml-lg.mr-lg(ng-class="{'btn-active': stocks.forecastDay === 1}" ng-click='stocks.showTable(1)')
+      span.ml-lg.mr-lg  Tomorrow's Price
+    button.btn.btn-tab.btn-blue(ng-class="{'btn-active': stocks.forecastDay === 10}" ng-click='stocks.showTable(10)')
+      span.ml-lg.mr-lg 10 Day Forecast
+
+  table.table.table-hover.m0(ng-if="stocks.forecastDay === 0")
+    thead
+      tr
+        th(style='width:1%;')
+        th Company
+        th.text-right Symbol
+        th.text-right Ask
+        th.text-right Bid
+        th.text-right Last
+        th.text-right Date
+        th.text-right Time
+    tbody.real_time_update
+      tr.text-grey.mda-list.clickable.ticker(ng-repeat='item in stocks.tickers track by item.tickerSymbol'
+                            ng-class='item.tickerSymbol'
+                            ui-sref='app.company({id:item.tickerSymbol})')
+        td
+          img.img-ticker(ng-src='{{item.iconUrl}}')
+        td {{::item.companyName}}
+        td.text-right {{::item.tickerSymbol}}
+        td.text-right.ticker_ask {{::item.ask | currency}}
+        td.text-right.ticker_bid {{::item.bid | currency}}
+        td.text-right.ticker_last {{::item.last | currency}}
+        td.text-right.ticker_date {{::item.date | date:'yyyy-MM-dd':'UTC'}}
+        td.text-right.ticker_time {{::item.date | date:'h:mm:ss':'UTC'}}
+
+  table.table.table-hover.m0(ng-if="stocks.forecastDay !== 0")
+    thead
+      tr
+        th(style='width:1%;')
+        th Company
+        th.text-right Symbol
+        th.text-right Price
+        th.text-right Change
+        th.text-right Change %
+        th.text-right Date
+        th.text-right Time
+        th.text-right(ng-if="stocks.forecastDay !== 0") Action
+    tbody
+      tr.text-grey.clickable(ng-repeat='item in stocks.tickers track by item.tickerSymbol' ui-sref='app.company({id:item.tickerSymbol})')
+        td
+          img.img-ticker(ng-src='{{item.iconUrl}}')
+        td {{::item.companyName}}
+        td.text-right {{::item.tickerSymbol}}
+        td.text-right {{stocks.getForecast(item).prediction | currency}}
+        td.text-right(ng-class='stocks.getForecast(item).trend') {{(stocks.getForecast(item).change > 0 ? '+' : '')+(stocks.getForecast(item).change | currency:'')}}
+        td.text-right(ng-class='stocks.getForecast(item).trend') {{stocks.getForecast(item).changePercent}}%
+        td.text-right {{stocks.getForecast(item).prediction_date | date:'yyyy-MM-dd':'UTC'}}
+        td.text-right {{stocks.getForecast(item).prediction_date | date:'h:mm:ss':'UTC'}}
+        td.text-right(ng-if="stocks.forecastDay !== 0")
+          button.btn.btn-action.btn-gray(ng-class='{"btn-red":stocks.getForecast(item).changePercent < -2, "btn-green":stocks.getForecast(item).changePercent > 2}')
+            span.text-uppercase.ml-lg.mr-lg {{stocks.getForecast(item).changePercent < -2 ? 'sell' : (stocks.getForecast(item).changePercent > 2 ? 'buy':'hold')}}

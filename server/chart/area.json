@@ -1,0 +1,15 @@
+[
+  {
+    "label": "Recurrent",
+    "color": "#7dc7df",
+    "data": [
+      ["Mar", 13],
+      ["Apr", 44],
+      ["May", 44],
+      ["Jun", 27],
+      ["Jul", 38],
+      ["Aug", 11],
+      ["Sep", 39]
+    ]
+  }
+]

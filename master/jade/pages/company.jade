@@ -1,0 +1,90 @@
+#company-page(ng-controller="StocksCompanyController as vm")
+    .company-hero
+    .container
+      .row.company-info-top
+        .col-md-7
+          .company-name
+            i.ar-company-first.icon-arrow-left(aria-hidden='true')
+            //- i.company-logo.fa(ng-if='vm.companyInfo.icon' ng-class='vm.companyInfo.icon')
+            .company-logo
+              img(ng-src='{{::vm.companyInfo.iconUrl}}')
+            div.inline
+              div.clearfix
+                h2 {{::vm.companyInfo.companyName}} ({{::vm.companyInfo.tickerSymbol}})
+                a.btn.btn-watchlist
+                  i.fa.fa-star-o(aria-hidden='true')
+                  | Add to watchlist
+              //- p.message NasdaqGS - NasdaqGS Delayed Price. Currency in USD
+        .col-md-5.text-right
+          p.company-value {{vm.companyInfo.last | currency:''}}
+            span.small-text(ng-class="vm.change > 0 ? 'text-success' : 'text-danger'")
+             span {{(vm.change > 0 ? '+' : '') + (vm.change | currency:'')}}
+             span ({{(vm.changePercent > 0 ? '+' : '') + (vm.changePercent)}}%)
+          //- p.message NasdaqGS - At close: 4:00 PM EST
+
+      .company-info-detail
+        // START panel
+        .panel
+          .panel-heading.p0
+            .panel-title Prediction
+              button.btn.btn-action.btn-gray.pull-right(ng-class='{"btn-red":vm.predictionCange < -2, "btn-green":vm.predictionCange > 2}')
+                span.text-uppercase.ml-lg.mr-lg {{vm.predictionCange < -2 ? 'sell' : (vm.predictionCange > 2 ? 'buy':'hold')}}
+          .panel-wrapper(uib-collapse="panelChart1")
+            .panel-body
+              stocks-prediction-chart(current='vm.companyInfo.last' previous-close="vm.previousClose" historical='vm.historical' predictions='vm.predictions')
+              //<div class="panel panel-default"><div class="panel-heading">Loading..</div><div class="panel-body loader-demo"><div class="ball-spin-fade-loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div></div>
+        .panel
+          .panel-heading.p0
+            .panel-title Stats
+          .row
+            .col-sm-6
+              ul.stats-list-group
+                li.list-group-item.clearfix
+                  span.item-label Bid
+                  span#value_bid.item-value {{vm.companyInfo.bid | currency:''}}
+                li.list-group-item.clearfix
+                  span.item-label Ask
+                  span#value_ask.item-value {{vm.companyInfo.ask | currency:''}}
+                li.list-group-item.clearfix
+                  span.item-label High
+                  span.item-value {{vm.companyInfo.high}}
+                li.list-group-item.clearfix
+                  span.item-label Low
+                  span.item-value {{vm.companyInfo.low}}
+                li.list-group-item.clearfix
+            .col-sm-6
+              ul.stats-list-group
+                li.list-group-item.clearfix
+                  span.item-label Last
+                  span#value_last.item-value {{vm.companyInfo.last | currency:''}}
+                li.list-group-item.clearfix
+                  span.item-label Previous Close
+                  span#value_prev_close.item-value {{vm.companyInfo.prevClose | currency:''}}
+                li.list-group-item.clearfix
+                  span.item-label Volume
+                  span#value_volume.item-value {{vm.companyInfo.volume}}
+                li.list-group-item.clearfix
+                  span.item-label Market Cap
+                  span#value_market_cap.item-value {{vm.companyInfo.marketCap}}
+                li.list-group-item.clearfix
+        // END panel
+        
+        // START panel
+        .panel.orb-holder
+          .panel-heading.no-pleft
+            .panel-title Top 40 sentiment influencers
+              span.orb-circle.pull-right
+                i.bg-red-500
+                | Negative sentiment
+              span.orb-circle.pull-right
+                i.bg-green-500
+                | Positive sentiment
+          .panel-wrapper(uib-collapse="panelChart1")
+            .panel-body.p0
+              orb-chart(ticker='vm.ticker')
+        .panel
+          .panel-heading.no-pleft
+            paneltool(tool-collapse, tool-dismiss, tool-refresh="traditional")
+            .panel-title Recent News
+          stocks-news(ticker='vm.ticker')
+        // END panel

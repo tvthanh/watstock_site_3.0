@@ -1,0 +1,13 @@
+<!-- top navbar-->
+<header class="topnavbar-wrapper" ng-include="'app/views/partials/top-navbar-h.html'"></header>
+<!-- sidebar-->
+<!--aside.aside(ng-include="'app/views/partials/sidebar.html'", ng-controller="SidebarController")-->
+<!-- offsidebar-->
+<!--aside.offsidebar(ng-include="'app/views/partials/offsidebar.html'")-->
+<!-- Main section-->
+<section>
+   <!-- Page content-->
+   <div ui-view="" autoscroll="false" ng-class="app.viewAnimation"></div>
+</section>
+<!-- Page footer-->
+<footer ng-include="'app/views/partials/footer.html'"></footer>

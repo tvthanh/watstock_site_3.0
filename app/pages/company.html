@@ -1,0 +1,117 @@
+<div id="company-page" ng-controller="StocksCompanyController as vm">
+   <div class="company-hero"></div>
+   <div class="container">
+      <div class="row company-info-top">
+         <div class="col-md-7">
+            <div class="company-name"><i class="ar-company-first icon-arrow-left" aria-hidden="true"></i>
+               <div class="company-logo">
+                  <img ng-src="{{::vm.companyInfo.iconUrl}}" />
+               </div>
+               <div class="inline">
+                  <div class="clearfix">
+                     <h2>{{::vm.companyInfo.companyName}} ({{::vm.companyInfo.tickerSymbol}})</h2><a class="btn btn-watchlist"><i class="fa fa-star-o" aria-hidden="true"></i>Add to watchlist</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-5 text-right">
+            <p class="company-value">{{vm.companyInfo.last | currency:''}}
+               <span class="small-text" ng-class="vm.change &gt; 0 ? 'text-success' : 'text-danger'">
+                  <span>{{(vm.change > 0 ? '+' : '') + (vm.change | currency:'')}}</span>
+                  <span>({{(vm.changePercent > 0 ? '+' : '') + (vm.changePercent)}}%)</span>
+               </span>
+            </p>
+         </div>
+      </div>
+      <div class="company-info-detail">
+         <!-- START panel-->
+         <div class="panel">
+            <div class="panel-heading p0">
+               <div class="panel-title">Prediction
+                  <button class="btn btn-action btn-gray pull-right" ng-class="{&quot;btn-red&quot;:vm.predictionCange &lt; -2, &quot;btn-green&quot;:vm.predictionCange &gt; 2}">
+                     <span class="text-uppercase ml-lg mr-lg">{{vm.predictionCange
+                        < -2 ? 'sell' : (vm.predictionCange>2 ? 'buy':'hold')}}</span>
+                  </button>
+               </div>
+            </div>
+            <div class="panel-wrapper" uib-collapse="panelChart1">
+               <div class="panel-body">
+                  <stocks-prediction-chart current="vm.companyInfo.last" previous-close="vm.previousClose" historical="vm.historical" predictions="vm.predictions"></stocks-prediction-chart>
+                  <!--<div class="panel panel-default"><div class="panel-heading">Loading..</div><div class="panel-body loader-demo"><div class="ball-spin-fade-loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div></div>--></div>
+            </div>
+         </div>
+         <div class="panel">
+            <div class="panel-heading p0">
+               <div class="panel-title">Stats</div>
+            </div>
+            <div class="row">
+               <div class="col-sm-6">
+                  <ul class="stats-list-group">
+                     <li class="list-group-item clearfix">
+                        <span class="item-label">Bid</span>
+                        <span class="item-value" id="value_bid">{{vm.companyInfo.bid | currency:''}}</span>
+                     </li>
+                     <li class="list-group-item clearfix">
+                        <span class="item-label">Ask</span>
+                        <span class="item-value" id="value_ask">{{vm.companyInfo.ask | currency:''}}</span>
+                     </li>
+                     <li class="list-group-item clearfix">
+                        <span class="item-label">High</span>
+                        <span class="item-value">{{vm.companyInfo.high}}</span>
+                     </li>
+                     <li class="list-group-item clearfix">
+                        <span class="item-label">Low</span>
+                        <span class="item-value">{{vm.companyInfo.low}}</span>
+                     </li>
+                     <li class="list-group-item clearfix"></li>
+                  </ul>
+               </div>
+               <div class="col-sm-6">
+                  <ul class="stats-list-group">
+                     <li class="list-group-item clearfix">
+                        <span class="item-label">Last</span>
+                        <span class="item-value" id="value_last">{{vm.companyInfo.last | currency:''}}</span>
+                     </li>
+                     <li class="list-group-item clearfix">
+                        <span class="item-label">Previous Close</span>
+                        <span class="item-value" id="value_prev_close">{{vm.companyInfo.prevClose | currency:''}}</span>
+                     </li>
+                     <li class="list-group-item clearfix">
+                        <span class="item-label">Volume</span>
+                        <span class="item-value" id="value_volume">{{vm.companyInfo.volume}}</span>
+                     </li>
+                     <li class="list-group-item clearfix">
+                        <span class="item-label">Market Cap</span>
+                        <span class="item-value" id="value_market_cap">{{vm.companyInfo.marketCap}}</span>
+                     </li>
+                     <li class="list-group-item clearfix"></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <!-- END panel-->
+         <!-- START panel-->
+         <div class="panel orb-holder">
+            <div class="panel-heading no-pleft">
+               <div class="panel-title">Top 40 sentiment influencers
+                  <span class="orb-circle pull-right"><i class="bg-red-500"></i>Negative sentiment</span>
+                  <span class="orb-circle pull-right"><i class="bg-green-500"></i>Positive sentiment</span>
+               </div>
+            </div>
+            <div class="panel-wrapper" uib-collapse="panelChart1">
+               <div class="panel-body p0">
+                  <orb-chart ticker="vm.ticker"></orb-chart>
+               </div>
+            </div>
+         </div>
+         <div class="panel">
+            <div class="panel-heading no-pleft">
+               <paneltool tool-collapse="tool-collapse" tool-dismiss="tool-dismiss" tool-refresh="traditional"></paneltool>
+               <div class="panel-title">Recent News</div>
+            </div>
+            <stocks-news ticker="vm.ticker"></stocks-news>
+         </div>
+         <!-- END panel-->
+      </div>
+   </div>
+</div>

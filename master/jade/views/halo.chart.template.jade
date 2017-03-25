@@ -1,0 +1,12 @@
+#currentDisplay(style='display: none;')
+  a
+.container.wrapper-halo-chart.clearfix(style='width:100%')
+  #viz_container.z-depth-3-no
+  .box-halo-controll.clearfix
+    .col-md-8.pull-left
+      #timeSlider.time-slider
+      #imgDiv(style='width:400px; margin:0px auto; margin-top:10px; text-align: center;')
+        img#playPause(src='app/img/pause_bw.png', width='24', height='24', style='display: inline-block; vertical-align: middle; cursor: pointer;')
+        span(style='display: inline-block; margin-top:4px; margin-left:4px') click on a timeline to skip to that point.
+    .col-md-4.pull-right
+      #infoChart

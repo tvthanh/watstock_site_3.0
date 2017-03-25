@@ -1,0 +1,27 @@
+[
+  {
+    "text": "Main Navigation",
+    "heading": "true",
+    "translate": "sidebar.heading.HEADER"
+  },
+  {
+    "text": "Home",
+    "sref": "app.home"
+  },
+  {
+    "text": "Features",
+    "sref": "app.features"
+  },
+  {
+    "text": "Pricing",
+    "sref": "app.pricing"
+  },
+  {
+    "text": " Investors",
+    "sref": "app.investors"
+  },
+  {
+    "text": "FAQ",
+    "sref": "app.faq"
+  }
+]

@@ -1,0 +1,100 @@
+.hero
+  .hero-msg
+    .container
+      .row
+        .col-md-6
+          h1.animated.fadeInLeft WATSTOCK DEEP-LEARNING TRADING PLATFORM
+          p.subtitle.animated.fadeInUp A learning neural network that predicts future stock pricing using a sophisticated deep learning model loaded with over 20 years of market performance data, earnings reports, up to the second sentiment data gathered instantly from social, financial and consumer networks.
+          button.btn.btn-outlet-white.mt
+            strong.text-uppercase.text-bold.ml-xl.mr-xl START NOW
+
+//.bg-white.bg-halo-chart.shadow-z1
+//  .container.pt-xl
+//    h2.title.text-center Sentiment for Top 40 Stocks
+//    .halo-chart-all(ng-controller="HaloChartController as haloChart")
+//        .loader-demo.loader-demo-sk(ng-if="!haloChart.loading")
+//          .sk-circle
+//            .sk-circle1.sk-child
+//            .sk-circle2.sk-child
+//            .sk-circle3.sk-child
+//            .sk-circle4.sk-child
+//            .sk-circle5.sk-child
+//            .sk-circle6.sk-child
+//            .sk-circle7.sk-child
+//            .sk-circle8.sk-child
+//            .sk-circle9.sk-child
+//            .sk-circle10.sk-child
+//            .sk-circle11.sk-child
+//            .sk-circle12.sk-child
+//        halo-chart(loading="haloChart.loading")
+
+.container.stock-panel.mt-xl.pt-lg
+  .panel.panel-default.p-lg
+    h2.title.text-center Most Popular Stock
+    p.subtitle.text-center Current Market Prices and Predictions for the Close Day, Tomorrow and where the price should be in 10 days
+    stocks-table
+
+.partners
+  .container
+    h2.title.text-center As Seen On
+    div.layout-row.img-center
+      .m-xl.flex
+        img(src='app/img/home/cnn.png')
+      .m-xl.flex
+        img(src='app/img/home/ameritrade.png')
+      .m-xl.flex
+        img(src='app/img/home/extrade.png')
+      .m-xl.flex
+        img(src='app/img/home/yahoo.png')
+      .m-xl.flex
+        img(src='app/img/home/thinkmarkets.png')
+
+
+.bg-white
+  .container.pb-xl.pt
+    h2.title.text-center What is Watstock?
+    p.subtitle.text-center Market trends predicted using an ever evolving neural network
+    .container.mb-xl.mt-xl
+      .row.text-center.mb.mt
+        .col-md-4
+          .img-holder
+            img(src='app/img/home/technology.png')
+          h2
+            small Technology
+          spna Watstock uses artificial intelligence and over 20 years of financial data to predict where the markets will go.
+        .col-md-4
+          .img-holder
+            img(src='app/img/home/precision.png')
+          h2
+            small Precision
+          spna Our network which combines intelligence from IBM Watson, Google Cloud with innovative data from PsychChannel, Quantopian and Quandl to predict market trends. Our predictions are accurate in excess of 80%.
+        .col-md-4
+          .img-holder
+            img(src='app/img/home/profit.png')
+          h2
+            small Profit
+          span You can use this data and take advantage of the intelligence we have gathered by enrolling in one of our subscription services.
+
+.container.devices
+  .row
+    .col-md-6
+      .info
+        h2.title Our product supports all platforms.
+        p.subtitle Watstock works everywhere, anywhere and on any device. Our API and SDKs help developers to add the Watstock market platform to their applications anywhere.
+        .mt-lg
+          a.mr(href='')
+            img(src='app/img/home/app_store.png')
+          a.mr(href='')
+           img(src='app/img/home/google_play.png')
+    .col-md-6
+      .img-cover
+        img(src='app/img/home/devices.png')
+
+.bg-white.pt-xl.pb-xl
+  .container.mt-lg.subscribe
+    h2.title.text-center Join the Watstock movement!
+    p.subtitle.text-center Signing up is fast, free and easy
+    p.text-center.mt-xl.mb-xl
+     input.form-control.align-middle.flex-50(placeholder='Type your email')
+     button.btn.btn-main.btn-register.flex-20
+        span.ml-lg.mr-lg Register

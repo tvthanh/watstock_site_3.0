@@ -1,0 +1,7 @@
+ul.stats-list-group.news-list-group
+  li.list-group-item(ng-repeat='item in news.list | limitTo:10')
+    div
+      h3.title
+        a(ng-href='{{item.url}}' target='_blank') {{item.title}}
+      p.date
+      p.details {{item.title}}
